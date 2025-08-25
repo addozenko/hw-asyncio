@@ -27,7 +27,7 @@ class Base(AsyncAttrs, DeclarativeBase):
     pass
 
 class Character(Base):
-    __tablename__ = "items"
+    __tablename__ = "сharacter"
 
     id: MappedColumn[int] = mapped_column(Integer, primary_key=True)
     api_id: MappedColumn[int] = mapped_column(Integer)
