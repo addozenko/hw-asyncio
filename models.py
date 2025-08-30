@@ -1,17 +1,19 @@
 import os
 import datetime
 
+from dotenv import load_dotenv
 from sqlalchemy import String, DateTime, Integer
 from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, MappedColumn, mapped_column, Mapped
 from sqlalchemy import func
 
+load_dotenv()
 
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "secret")
-POSTGRES_USER = os.getenv("POSTGRES_USER", "app")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "app")
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5431")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+POSTGRES_USER = os.getenv("POSTGRES_USER")
+POSTGRES_DB = os.getenv("POSTGRES_DB")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT")
 
 POSTGRES_DSN = (
     f"postgresql+asyncpg://"
@@ -30,7 +32,7 @@ class Character(Base):
     __tablename__ = "сharacter"
 
     id: MappedColumn[int] = mapped_column(Integer, primary_key=True)
-    api_id: MappedColumn[int] = mapped_column(Integer)
+    api_id: MappedColumn[str] = mapped_column(String)
     name: MappedColumn[str] = MappedColumn(String, unique=True)
     birth_year: MappedColumn[str] = mapped_column(String)
     eye_color: MappedColumn[str] = mapped_column(String)
